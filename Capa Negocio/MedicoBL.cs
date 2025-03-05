@@ -32,15 +32,15 @@ namespace Capa_Negocio
 
         private void ValidarMedico(MedicosCLS medico)
         {
-            if (medico.nombre == null)
+            if (string.IsNullOrEmpty(medico.nombre) || !System.Text.RegularExpressions.Regex.IsMatch(medico.nombre, "^[a-zA-Z]+$"))
             {
-                throw new Exception("El nombre no puede ser nulo");
+                throw new Exception("El nombre no puede ser nulo y debe contener solo letras");
             }
-            if (medico.apellido == null)
+            if (string.IsNullOrEmpty(medico.apellido) || !System.Text.RegularExpressions.Regex.IsMatch(medico.apellido, "^[a-zA-Z]+$"))
             {
-                throw new Exception("El apellido no puede ser nulo");
+                throw new Exception("El apellido no puede ser nulo y debe contener solo letras");
             }
-            
+
             if (string.IsNullOrEmpty(medico.telefono) || !System.Text.RegularExpressions.Regex.IsMatch(medico.telefono, "^09\\d{8}$"))
             {
                 throw new ArgumentException("El teléfono debe tener 10 dígitos y empezar con '09'.");

@@ -64,7 +64,7 @@ function Editar(id) {
 function Eliminar(id) {
     fetchGet("Especialidad/ObtenerEspecialidad/?especialidadId=" + id, "json", function (data) {
         Confirmar(undefined, "¿Desea eliminar la especialidad: " + data.nombre + " ?", function () {
-            fetchGet("Especialidad/EliminarEspecialidad/?id=" + id, "text", function (r) {
+            fetchGet("Especialidad/EliminarEspecialidad/?especialidadId=" + id, "text", function (r) {
                 Exito("Especialidad eliminada del sistema con éxito.");
                 ListarEspecialidades();
             });
