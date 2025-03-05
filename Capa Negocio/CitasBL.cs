@@ -15,5 +15,16 @@ namespace Capa_Negocio
             CitasDAL obj = new CitasDAL();
             return obj.ListarCitas();
         }
+        public List<PacientesCLS> CargarPacientes()
+        {
+            CitasDAL obj = new CitasDAL();
+            return obj.CargarPacientes();
+        }
+        public List<MedicosCLS> CargarMedicos()
+        {
+            CitasDAL obj = new CitasDAL();
+            return obj.cargarMedicos();
+        }
+
     }
 }

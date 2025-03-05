@@ -16,5 +16,17 @@ namespace SistemadeGestiónHospitalariaWebProyecto.Controllers
             CitasBL obj = new CitasBL();
             return obj.ListarCitas();
         }
+        public JsonResult CargarPacientes()
+        {
+            CitasBL obj = new CitasBL();
+            var pacientes = obj.CargarPacientes();
+            return Json(pacientes);
+        }
+        public JsonResult CargarMedicos()
+        {
+            CitasBL obj = new CitasBL();
+            var medicos = obj.CargarMedicos();
+            return Json(medicos);
+        }
     }
 }
