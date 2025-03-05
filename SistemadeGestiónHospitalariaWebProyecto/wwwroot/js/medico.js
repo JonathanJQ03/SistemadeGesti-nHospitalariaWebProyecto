@@ -1,5 +1,6 @@
 ﻿window.onload = function () {
     ListarMedicos();
+    cargarEspecialidad();
 }
 
 document.addEventListener('DOMContentLoaded', function () {
@@ -33,11 +34,11 @@ async function ListarMedicos() {
 
     objMedicos = {
         url: "Medicos/ListarMedicos",
-        cabeceras: ["Id Médico", "Nombre", "Apellido", "Especialidad", "Telefono", "Correo Electronico"],
-        propiedades: ["id", "nombre", "apellido", "especialidadId", "telefono", "email"],
+        cabeceras: ["Id Médico", "Nombre", "Apellido", "Id Especialidad", "Telefono", "Correo Electronico"],
+        propiedades: ["idMedico", "nombre", "apellido", "especialidadId", "telefono", "email"],
         divContenedorTabla: "divContenedorTabla",
-        propiedadID: "id",
-        tablaID: "tablaMedicos" // Agregar un ID a la tabla
+        propiedadID: "idMedico",
+        
     }
 
     pintar(objMedicos); // Asegurarse de que la función pintar se complete antes de continuar
@@ -62,6 +63,20 @@ function GuardarMedico() {
     });
 }
 
+function cargarEspecialidad() {
+    console.log("Cargando Especialidades..."); // Añade esta línea
+    fetchGet("Medicos/CargarEspecialidad", "json", function (data) {
+        console.log("Especialidades recibidas:", data); // Y esta línea
+        let selectEspecialidad = document.getElementById("especialidadId");
+        selectEspecialidad.innerHTML = "<option value=''>Seleccione una especalidad</option>";
+        data.forEach(function (especialidad) {
+            let option = document.createElement("option");
+            option.value = especialidad.especialidadId;
+            option.text = especialidad.nombre;
+            selectEspecialidad.appendChild(option);
+        });
+    });
+}
 function MostrarModal() {
     LimpiarDatos("frmMedico");
     var myModal = new bootstrap.Modal(document.getElementById('exampleModalCenter'));

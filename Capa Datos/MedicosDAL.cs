@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
@@ -84,6 +85,44 @@ namespace Capa_Datos
             return respuesta;
         }
 
-        
+        public List<EspecialidadCLS> cargarEspecialidad()
+        {
+            List<EspecialidadCLS> listaEspecialidades = new List<EspecialidadCLS>();
+
+            using (SqlConnection cn = new SqlConnection(this.cadena))
+            {
+                try
+                {
+                    cn.Open();
+                    using (SqlCommand cmd = new SqlCommand("uspListarEspecialidades", cn))
+                    {
+                        cmd.CommandType = CommandType.StoredProcedure;
+
+                        using (SqlDataReader dr = cmd.ExecuteReader())  // Se encierra en using para liberar recursos
+                        {
+                            while (dr.Read())
+                            {
+                                EspecialidadCLS oEspecialidadCLS = new EspecialidadCLS
+                                {
+
+                                    especialidadId = dr.IsDBNull(0) ? 0 : dr.GetInt32(0),
+                                    nombre = dr.IsDBNull(1) ? "" : dr.GetString(1),
+                                };
+
+                                listaEspecialidades.Add(oEspecialidadCLS);
+                            }
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    // Se recomienda registrar el error en logs
+                    Console.WriteLine("Error: " + ex.Message);
+                    listaEspecialidades = null;
+                }
+            }
+            return listaEspecialidades;
+        }
+
     }
 }

@@ -56,10 +56,8 @@ function cargarMedicos() {
 
     fetchGet("Citas/CargarMedicos", "json", function (data) {
         console.log("Datos recibidos:", data); // Para verificar la respuesta
-
         let selectMedicos = document.getElementById("medicoId");
         selectMedicos.innerHTML = "<option value=''>Seleccione un médico</option>";
-
         if (data.length === 0) {
             console.warn("No se recibieron médicos.");
             return;

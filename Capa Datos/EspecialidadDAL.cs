@@ -33,7 +33,7 @@ namespace Capa_Datos
                             while (dr.Read())
                             {
                                 oEspecialidadCLS = new EspecialidadCLS();
-                                oEspecialidadCLS.id = dr.IsDBNull(0) ? 0 : dr.GetInt32(0);
+                                oEspecialidadCLS.especialidadId = dr.IsDBNull(0) ? 0 : dr.GetInt32(0);
                                 oEspecialidadCLS.nombre = dr.IsDBNull(1) ? "" : dr.GetString(1);
                                 listaEspecialidades.Add(oEspecialidadCLS);
                             }
@@ -59,7 +59,7 @@ namespace Capa_Datos
                     using (SqlCommand cmd = new SqlCommand("uspGuardarEspecialidad", cn))
                     {
                         cmd.CommandType = System.Data.CommandType.StoredProcedure;
-                        cmd.Parameters.AddWithValue("@id", oEspecialidadCLS.id);
+                        cmd.Parameters.AddWithValue("@id", oEspecialidadCLS.especialidadId);
                         cmd.Parameters.AddWithValue("@nombre", oEspecialidadCLS.nombre == null ? "" : oEspecialidadCLS.nombre);
                         respuesta = cmd.ExecuteNonQuery();
                     }
@@ -73,7 +73,7 @@ namespace Capa_Datos
             }
             return respuesta;
         }
-        public EspecialidadCLS ObtenerEspecialidad(int id)
+        public EspecialidadCLS ObtenerEspecialidad(int especialidadId)
         {
             EspecialidadCLS oEspecialidadCLS = new EspecialidadCLS();
 
@@ -85,7 +85,7 @@ namespace Capa_Datos
                     using (SqlCommand cmd = new SqlCommand("uspObtenerEspecialidad", cn))
                     {
                         cmd.CommandType = System.Data.CommandType.StoredProcedure;
-                        cmd.Parameters.AddWithValue("@id", id);
+                        cmd.Parameters.AddWithValue("@id", especialidadId);
                         SqlDataReader dr = cmd.ExecuteReader();
 
 
@@ -94,7 +94,7 @@ namespace Capa_Datos
                             while (dr.Read())
                             {
                                 
-                                oEspecialidadCLS.id = dr.IsDBNull(0) ? 0 : dr.GetInt32(0);
+                                oEspecialidadCLS.especialidadId = dr.IsDBNull(0) ? 0 : dr.GetInt32(0);
                                 oEspecialidadCLS.nombre = dr.IsDBNull(1) ? "" : dr.GetString(1);
                                 
 
@@ -114,7 +114,7 @@ namespace Capa_Datos
             return oEspecialidadCLS;
 
         }
-        public int EliminarEspecialidad(int id)
+        public int EliminarEspecialidad(int especialidadId)
         {
             int respuesta = 0;
             using (SqlConnection cn = new SqlConnection(this.cadena))
@@ -125,7 +125,7 @@ namespace Capa_Datos
                     using (SqlCommand cmd = new SqlCommand("uspEliminarEspecialidad", cn))
                     {
                         cmd.CommandType = System.Data.CommandType.StoredProcedure;
-                        cmd.Parameters.AddWithValue("@id", id);
+                        cmd.Parameters.AddWithValue("@id", especialidadId);
                         respuesta = cmd.ExecuteNonQuery();
                     }
                 }

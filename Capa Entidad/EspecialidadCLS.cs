@@ -8,7 +8,7 @@ namespace Capa_Entidad
 {
     public class EspecialidadCLS
     {
-        public int id { get; set; }
+        public int especialidadId { get; set; }
         public string nombre { get; set; }
     }
 }

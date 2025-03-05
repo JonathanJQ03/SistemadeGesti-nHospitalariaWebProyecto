@@ -1,7 +1,8 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Capa_Datos;
+﻿using Capa_Datos;
 using Capa_Entidad;
 using Capa_Negocio;
+using Microsoft.AspNetCore.Mvc;
+using System;
 
 namespace SistemadeGestiónHospitalariaWebProyecto.Controllers
 {
@@ -21,7 +22,12 @@ namespace SistemadeGestiónHospitalariaWebProyecto.Controllers
             MedicoBL medicoobj = new MedicoBL();
             return medicoobj.GuardarMedicos(oMedicoCLS);
         }
-
+        public JsonResult CargarEspecialidad()
+        {
+            MedicoBL obj = new MedicoBL();
+            var especialidad = obj.CargarEspecialidad();
+            return Json(especialidad);
+        }
 
     }
 }

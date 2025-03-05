@@ -20,11 +20,11 @@ async function ListarEspecialidades() {
     objEspecialidades = {
         url: "Especialidad/ListarEspecialidades",
         cabeceras: ["Id Especialidad", "Nombre"],
-        propiedades: ["id", "nombre"],
+        propiedades: ["especialidadId", "nombre"],
         divContenedorTabla: "divContenedorTabla",
         editar: true,
         eliminar: true,
-        propiedadID: "id"
+        propiedadID: "idespecialidadId
     }
 
     pintar(objEspecialidades);
@@ -52,8 +52,8 @@ function MostrarModal() {
 }
 
 function Editar(id) {
-    fetchGet("Especialidad/ObtenerEspecialidad/?id=" + id, "json", function (data) {
-        setN("id", data.id); 
+    fetchGet("Especialidad/ObtenerEspecialidad/?especialidadId=" + id, "json", function (data) {
+        setN("especialidadId", data.id); 
         setN("nombre", data.nombre);
 
         var myModal = new bootstrap.Modal(document.getElementById('exampleModalCenter'));
@@ -62,7 +62,7 @@ function Editar(id) {
 }
 
 function Eliminar(id) {
-    fetchGet("Especialidad/ObtenerEspecialidad/?id=" + id, "json", function (data) {
+    fetchGet("Especialidad/ObtenerEspecialidad/?especialidadId=" + id, "json", function (data) {
         Confirmar(undefined, "¿Desea eliminar la especialidad: " + data.nombre + " ?", function () {
             fetchGet("Especialidad/EliminarEspecialidad/?id=" + id, "text", function (r) {
                 Exito("Especialidad eliminada del sistema con éxito.");
