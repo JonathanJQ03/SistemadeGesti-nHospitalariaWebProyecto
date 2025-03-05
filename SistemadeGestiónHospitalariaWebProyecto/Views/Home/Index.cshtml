@@ -1,0 +1,141 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<!-- Encapsula los estilos dentro de una clase específica -->
+<style>
+    /* Estilos específicos para el carrusel */
+    .custom-carousel .carousel-control-prev,
+    .custom-carousel .carousel-control-next {
+        width: 40px; /* Ancho del botón */
+        height: 40px; /* Alto del botón */
+        background-color: rgba(0, 0, 0, 0.5); /* Fondo semi-transparente */
+        border-radius: 50%; /* Hace que los botones sean redondos */
+        top: 50%; /* Centra verticalmente */
+        transform: translateY(-50%); /* Ajusta la posición vertical */
+    }
+
+    .custom-carousel .carousel-control-prev {
+        left: -65px; /* Ajusta este valor para moverlo más a la izquierda */
+    }
+
+    /* Separar el botón "Siguiente" más a la derecha */
+    .custom-carousel .carousel-control-next {
+        right: -65px; /* Ajusta este valor para moverlo más a la derecha */
+    }
+    .custom-carousel .carousel-control-prev-icon,
+    .custom-carousel .carousel-control-next-icon {
+        width: 20px; /* Ancho del ícono */
+        height: 20px; /* Alto del ícono */
+    }
+
+    .custom-logo {
+        border-radius: 10%; /* Ajusta el radio del borde */
+        border: 3px solid #007bff; /* Borde opcional azul */
+    }
+
+</style>
+
+<div class="container py-1">
+    <!-- Título del hospital y espacio para el logo -->
+    <div class="row mb-3 align-items-center bg-light p-3 rounded shadow-sm ">
+        <div class="col-md-6">
+            <h1 class="h3 fw-bold text-primary mb-1">MediGestión</h1>
+            <h2 class="h6 text-secondary mb-2">Centro de Gestión Hospitalaria</h2>
+            <p class="text-muted small">Innovamos la gestión hospitalaria para brindar una atención más eficiente.</p>
+        </div>
+        <div class="col-md-6 text-md-end text-center">
+            <img src="~/Imagenes/Logo.png"
+                 alt="Logo del Hospital"
+                 class="img-fluid shadow custom-logo"
+                 width="120" height="120">
+
+        </div>
+    </div>
+
+
+
+    <!-- Contenedor del Carrusel -->
+    <div class="row justify-content-center">
+        <div class="col-md-7">
+            <!-- Aumenté el ancho del carrusel a col-md-10 -->
+            <!-- Añade la clase personalizada "custom-carousel" al contenedor del carrusel -->
+            <div id="carouselExample" class="carousel slide custom-carousel" data-bs-ride="carousel">
+                <div class="carousel-inner">
+                    <!-- Tarjeta 1: Gestión de Pacientes -->
+                    <div class="carousel-item active">
+                        <div class="card h-100">
+                            <!-- Añadí h-100 para que las tarjetas tengan la misma altura -->
+                            <img src="~/Imagenes/pacientes.jpg" class="card-img-top" alt="Gestión de Pacientes" height="280">
+                            <div class="card-body">
+                                <h5 class="card-title">Gestión de Pacientes</h5>
+                                <p class="card-text">Módulo para registrar y administrar la información de los pacientes, incluyendo datos personales, historial médico y citas programadas.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Tarjeta 2: Gestión de Médicos -->
+                    <div class="carousel-item">
+                        <div class="card h-100">
+                            <img src="~/Imagenes/Medicos.jpg" class="card-img-top" alt="Gestión de Médicos" height="280">
+                            <div class="card-body">
+                                <h5 class="card-title">Gestión de Médicos</h5>
+                                <p class="card-text">Permite administrar los datos de los médicos, asignar especialidades y gestionar sus horarios de atención.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Tarjeta 3: Gestión de Especialidades -->
+                    <div class="carousel-item">
+                        <div class="card h-100">
+                            <img src="~/Imagenes/Especialidades.jpg" class="card-img-top" alt="Gestión de Especialidades" height="280">
+                            <div class="card-body">
+                                <h5 class="card-title">Gestión de Especialidades</h5>
+                                <p class="card-text">Facilita la organización y asignación de especialidades médicas, optimizando la atención a los pacientes.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Tarjeta 4: Gestión de Citas -->
+                    <div class="carousel-item">
+                        <div class="card h-100">
+                            <img src="~/Imagenes/CitasMedicas.jpg" class="card-img-top" alt="Gestión de Citas" height="280">
+                            <div class="card-body">
+                                <h5 class="card-title">Gestión de Citas</h5>
+                                <p class="card-text">Sistema para programar, modificar y cancelar citas médicas, mejorando la eficiencia en la atención.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Tarjeta 5: Gestión de Tratamientos -->
+                    <div class="carousel-item">
+                        <div class="card h-100">
+                            <img src="~/Imagenes/Tratamientos.jpg" class="card-img-top" alt="Gestión de Tratamientos" height="280">
+                            <div class="card-body">
+                                <h5 class="card-title">Gestión de Tratamientos</h5>
+                                <p class="card-text">Permite llevar un registro detallado de los tratamientos prescritos a los pacientes y su seguimiento.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Tarjeta 6: Facturación -->
+                    <div class="carousel-item">
+                        <div class="card h-100">
+                            <img src="~/Imagenes/Factura.jpg" class="card-img-top" alt="Facturación" height="280">
+                            <div class="card-body">
+                                <h5 class="card-title">Facturación</h5>
+                                <p class="card-text">Módulo para generar y gestionar facturas de servicios médicos, asegurando una correcta administración financiera.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Controles del Carrusel -->
+                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Anterior</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Siguiente</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+</div>

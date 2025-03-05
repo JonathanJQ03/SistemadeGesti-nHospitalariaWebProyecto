@@ -1,0 +1,124 @@
+/* Reset básico */
+body, ul, li, a {
+    margin: 0;
+    padding: 0;
+    text-decoration: none;
+    list-style: none;
+    box-sizing: border-box;
+}
+
+html {
+    font-size: 14px;
+    height: 100%;
+}
+
+@media (min-width: 768px) {
+    html {
+        font-size: 16px;
+    }
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    font-family: 'Open Sans', sans-serif;
+}
+
+.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
+    box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+}
+
+.form-floating > .form-control-plaintext::placeholder, .form-floating > .form-control::placeholder {
+    color: var(--bs-secondary-color);
+    text-align: end;
+}
+
+.form-floating > .form-control-plaintext:focus::placeholder, .form-floating > .form-control:focus::placeholder {
+    text-align: start;
+}
+
+
+
+/* Contenedor principal - Estructura flex para sidebar y contenido */
+.main-wrapper {
+    display: flex;
+    flex: 1;
+    min-height: 0; /* Importante para que el flex funcione correctamente */
+}
+
+/* Sidebar */
+#sidebar-nav {
+    width: 250px;
+    background: #3674B5;
+    height: 100%;
+    overflow-y: hidden;
+    flex-shrink: 0;
+}
+
+    #sidebar-nav ul {
+        width: 100%;
+    }
+
+        #sidebar-nav ul li {
+            padding: 20px;
+            transition: background 0.3s;
+        }
+
+            #sidebar-nav ul li a {
+                color: #f8f9fa;
+                font-size: 1em;
+                font-weight: 600;
+                display: flex;
+                align-items: center;
+            }
+
+                #sidebar-nav ul li a i {
+                    margin-right: 10px;
+                    font-size: 1.3em;
+                    color: #ffffff;
+                    width: 25px;
+                    text-align: center;
+                }
+
+            #sidebar-nav ul li:hover {
+                background: #fff;
+            }
+
+                #sidebar-nav ul li:hover a,
+                #sidebar-nav ul li:hover a i,
+                #sidebar-nav ul li.active a,
+                #sidebar-nav ul li.active a i {
+                    color: #333;
+                }
+
+/* Contenido principal */
+.container {
+    flex: 1;
+    padding: 20px;
+    overflow-y: auto;
+}
+
+/* Estilos generales para el modo oscuro */
+.modo-oscuro{
+    background-color: #121212;
+    color: #ffffff;
+}
+
+    /* Estilos específicos para el menú en modo oscuro */
+    .modo-oscuro #sidebar-nav {
+        background-color: #1e1e1e;
+    }
+.btn.modo-oscuro {
+    background-color: #ffffff;
+    color: #121212;
+}
+
+/* Estilo para el título en modo oscuro */
+h1.modo-oscuro, h2.modo-oscuro, h3.modo-oscuro, h4.modo-oscuro, h5.modo-oscuro, h6.modo-oscuro {
+    color: #ffffff;
+}
+
+
+/* Otros estilos personalizados para el modo oscuro */
+/* ... */

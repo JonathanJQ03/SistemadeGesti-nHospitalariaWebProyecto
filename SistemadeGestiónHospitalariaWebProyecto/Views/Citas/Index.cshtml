@@ -1,0 +1,101 @@
+﻿@{
+    ViewData["Title"] = "Citas";
+}
+
+<h1 class="display-6 text-primary1 text-center fw-bold"><i class="fas fa-notes-medical me-4" style="font-size:36px;"></i>Citas</h1>
+
+<style>
+    .bg-info1 {
+        --bs-bg-opacity: 1;
+        background-color: #3674B5 !important;
+    }
+
+    .text-primary1 {
+        color: black !important;
+    }
+</style>
+
+<br />
+
+<button type="button" class="btn btn-outline-dark" data-bs-toggle="modal" data-bs-target="#modalCita">
+    <i class="fas fa-plus me-2"></i> Agregar Cita
+</button>
+
+<br />
+<br />
+
+<!-- Modal para gestionar citas -->
+<div class="modal fade" id="modalCita" tabindex="-1" aria-labelledby="modalCitaTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalCitaTitle">Gestionar Cita</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="frmCita" method="post" class="row g-3 needs-validation" novalidate>
+                    <div class="col-md-4">
+                        <label for="idCita" class="form-label">Id Cita</label>
+                        <input type="text" class="form-control shadow-sm rounded" name="idCita" id="idCita" readonly>
+                    </div>
+                    <div class="col-md-4">
+                        <label for="pacienteId" class="form-label">Paciente</label>
+                        <select class="form-control shadow-sm rounded" name="pacienteId" id="pacienteId" required>
+                            <!-- Opciones de pacientes se cargarán dinámicamente -->
+                            <option value="">Seleccione un paciente</option>
+                        </select>
+                        <div class="invalid-feedback">
+                            Por favor, seleccione un paciente.
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <label for="medicoId" class="form-label">Médico</label>
+                        <select class="form-control shadow-sm rounded" name="medicoId" id="medicoId" required>
+                            <!-- Opciones de médicos se cargarán dinámicamente -->
+                            <option value="">Seleccione un médico</option>
+                        </select>
+                        <div class="invalid-feedback">
+                            Por favor, seleccione un médico.
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <label for="fechaHora" class="form-label">Fecha y Hora</label>
+                        <input type="datetime-local" class="form-control shadow-sm rounded" name="fechaHora" id="fechaHora" required>
+                        <div class="invalid-feedback">
+                            Por favor, ingrese la fecha y hora.
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <label for="estado" class="form-label">Estado</label>
+                        <select class="form-control shadow-sm rounded" name="estado" id="estado" required>
+                            <option value="">Seleccione un estado</option>
+                            <option value="Programada">Programada</option>
+                            <option value="Cancelada">Cancelada</option>
+                            <option value="Completada">Completada</option>
+                        </select>
+                        <div class="invalid-feedback">
+                            Por favor, seleccione un estado.
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-success" onclick="GuardarCita()">Guardar</button>
+                <button type="button" class="btn btn-secondary" onclick="LimpiarDatos('frmCita')">Limpiar</button>
+                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="card shadow">
+    <div class="card-header bg-info1 text-white">
+        <h5 class="mb-0">Lista de Citas</h5>
+    </div>
+    <div class="card-body">
+        <div id="divContenedorTabla"></div>
+    </div>
+</div>
+
+<script src="~/js/generic.js"></script>
+<script src="~/js/citas.js"></script>

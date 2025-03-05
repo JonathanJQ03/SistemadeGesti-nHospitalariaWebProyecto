@@ -1,0 +1,125 @@
+﻿@{
+    ViewData["Title"] = "Pacientes";
+}
+
+<h1 class="display-6 text-primary1 text-center fw-bold"> <i class="fa fa-wheelchair me-4" style="font-size:36px;"></i>Pacientes</h1></h1>
+
+<style>
+    .bg-info1 {
+        --bs-bg-opacity: 1;
+        background-color: #3674B5 !important;
+    }
+
+    .text-primary1 {
+        color: black !important;
+    }
+</style>
+
+<br />
+
+<button type="button" class="btn btn-outline-dark" data-bs-toggle="modal" data-bs-target="#exampleModalCenter">
+    <i class="fas fa-plus me-2"></i> Agregar Paciente
+</button>
+
+<br />
+<br />
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Gestionar Paciente</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="frmPaciente" method="post" class="row g-3 needs-validation" novalidate>
+                    <div class="col-md-4">
+                        <label for="idPaciente" class="form-label">Id Paciente</label>
+                        <input type="text" class="form-control shadow-sm rounded" name="idPaciente" id="idPaciente" readonly>
+                    </div>
+                    <div class="col-md-4">
+                        <label for="nombre" class="form-label">Nombre</label>
+                        <input type="text" class="form-control shadow-sm rounded" name="nombre" id="nombre" required>
+                        <div class="invalid-feedback">
+                            Por favor, ingresar el nombre del paciente.
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <label for="apellido" class="form-label">Apellido</label>
+                        <input type="text" class="form-control shadow-sm rounded" name="apellido" id="apellido" required>
+                        <div class="invalid-feedback">
+                            Por favor, ingresa el apellido del paciente.
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <label for="fechaNacimiento" class="form-label">Fecha Nacimiento</label>
+                        <input type="date" class="form-control shadow-sm rounded" name="fechaNacimiento" id="fechaNacimiento" required>
+                        <div class="invalid-feedback">
+                            Por favor, ingresa la fecha de nacimiento del paciente.
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <label for="telefono" class="form-label">Teléfono</label>
+                        <input type="text" class="form-control shadow-sm rounded" name="telefono" id="telefono" required>
+                        <div class="invalid-feedback">
+                            Por favor, ingresa el teléfono del paciente.
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <label for="email" class="form-label">Email</label>
+                        <input type="email" class="form-control shadow-sm rounded" name="email" id="email" required>
+                        <div class="invalid-feedback">
+                            Por favor, ingresa un email válido.
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <label for="direccion" class="form-label">Dirección</label>
+                        <input type="text" class="form-control shadow-sm rounded" name="direccion" id="direccion" required>
+                        <div class="invalid-feedback">
+                            Por favor, ingresa la dirección del paciente.
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-success" onclick="GuardarPaciente()">Guardar</button>
+                <button type="button" class="btn btn-outline-secondary" onclick="LimpiarDatos('frmPaciente')">Limpiar</button>
+                <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="card shadow">
+    <div class="card-header bg-info1 text-white">
+        <h5 class="mb-0">Lista de Pacientes</h5>
+    </div>
+    <div class="card-body">
+        <div id="divContenedorTabla"></div>
+    </div>
+</div>
+<script>
+        (function () {
+        'use strict'
+
+        // Obtener todos los formularios a los que queremos aplicar estilos de validación de Bootstrap personalizados
+        var forms = document.querySelectorAll('.needs-validation')
+
+        // Bucle sobre ellos y evitar el envío
+        Array.prototype.slice.call(forms)
+            .forEach(function (form) {
+                form.addEventListener('submit', function (event) {
+                    if (!form.checkValidity()) {
+                        event.preventDefault()
+                        event.stopPropagation()
+                    }
+
+                    form.classList.add('was-validated')
+                }, false)
+            })
+    })()
+</script>
+
+<script src="~/js/generic.js"></script>
+<script src="~/js/paciente.js"></script>

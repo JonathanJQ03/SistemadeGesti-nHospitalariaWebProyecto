@@ -1,0 +1,94 @@
+﻿@{
+    ViewData["Title"] = "Especialidades";
+}
+
+<h1 class="display-6 text-primary1 text-center fw-bold"> <i class="fas fa-tablets me-4" style="font-size:36px;"></i>Especialidades</h1></h1>
+
+<style>
+    .bg-info1 {
+        --bs-bg-opacity: 1;
+        background-color: #3674B5 !important;
+    }
+
+    .text-primary1 {
+        color: black !important;
+    }
+</style>
+
+<br />
+
+<button type="button" class="btn btn-outline-dark" data-bs-toggle="modal" data-bs-target="#exampleModalCenter">
+    <i class="fas fa-plus me-2"></i>  Agregar Especialidad
+</button>
+
+<br />
+<br />
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Gestionar Especialidad</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <!-- Formulario con validación -->
+                <form id="frmEspecialidad" method="post" class="needs-validation" novalidate>
+                    <div class="col-md-4 mb-3">
+                        <label for="idEspecialidad" class="form-label">Id Especialidad</label>
+                        <input type="text" class="form-control shadow-sm rounded" name="idEspecialidad" id="idEspecialidad" readonly>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <label for="nombre" class="form-label">Nombre</label>
+                        <input type="text" class="form-control shadow-sm rounded" name="nombre" id="nombre" required>
+                        <div class="invalid-feedback">
+                            Por favor, ingrese la especialidad.
+                        </div>
+                    </div>
+                    <!-- Agrega más campos según sea necesario -->
+                </form>
+            </div>
+            <div class="modal-footer">
+                <!-- Botón Guardar con validación -->
+                <button type="button" class="btn btn-outline-success" onclick="validarYGuardar()">Guardar</button>
+                <button type="button" class="btn btn-outline-secondary" onclick="LimpiarDatos('frmEspecialidad')">Limpiar</button>
+                <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="card shadow">
+    <div class="card-header bg-info1 text-white">
+        <h5 class="mb-0">Lista de Especialidades</h5>
+    </div>
+    <div class="card-body">
+        <div id="divContenedorTabla"></div>
+    </div>
+</div>
+
+<script>
+    function validarYGuardar() {
+        const formulario = document.getElementById('frmEspecialidad');
+        formulario.classList.add('was-validated');
+
+        if (formulario.checkValidity()) {
+            GuardarEspecialidad();
+        }
+    }
+
+    function GuardarEspecialidad() {
+
+        console.log('Especialidad guardada');
+    }
+
+    function LimpiarDatos(formId) {
+        const formulario = document.getElementById(formId);
+        formulario.reset(); 
+        formulario.classList.remove('was-validated');
+    }
+</script>
+<script src="~/js/generic.js"></script>
+<script src="~/js/especialidad.js"></script>
