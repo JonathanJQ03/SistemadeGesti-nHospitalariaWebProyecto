@@ -53,7 +53,7 @@ namespace Capa_Datos
             }
             return listaMedicos;
         }
-
+        
         public int GuardarMedico(MedicosCLS oMedicoCLS)
         {
             int respuesta = 0;
@@ -84,6 +84,6 @@ namespace Capa_Datos
             return respuesta;
         }
 
-
+        
     }
 }

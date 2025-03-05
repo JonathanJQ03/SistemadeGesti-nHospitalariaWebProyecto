@@ -1,0 +1,93 @@
+﻿@{
+    ViewData["Title"] = "Tratamientos";
+
+}
+
+<h1 class="display-6 text-primary1 text-center fw-bold">Tratamientos</h1>
+
+<style>
+    .bg-info1 {
+        --bs-bg-opacity: 1;
+        background-color: #8e74b6 !important;
+    }
+
+    .text-primary1 {
+        color: black !important;
+    }
+</style>
+
+<br />
+
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalTratamiento">
+    Agregar Tratamiento
+</button>
+
+<br />
+<br />
+
+<!-- Modal para gestionar tratamientos -->
+<div class="modal fade" id="modalTratamiento" tabindex="-1" aria-labelledby="modalTratamientoTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalTratamientoTitle">Gestionar Tratamiento</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="frmTratamiento" method="post" class="row g-3 needs-validation" novalidate>
+                    <div class="col-md-4">
+                        <label for="idTratamiento" class="form-label">Id Tratamiento</label>
+                        <input type="text" class="form-control shadow-sm rounded" name="idTratamiento" id="idTratamiento" readonly>
+                    </div>
+                    <div class="col-md-4">
+                        <label for="pacienteId" class="form-label">Paciente</label>
+                        <select class="form-control shadow-sm rounded" name="pacienteId" id="pacienteId" required>
+                            <option value="">Seleccione un paciente</option>
+                        </select>
+                        <div class="invalid-feedback">
+                            Por favor, seleccione un paciente.
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <label for="descripcion" class="form-label">Descripción</label>
+                        <input type="text" class="form-control shadow-sm rounded" name="descripcion" id="descripcion" required>
+                        <div class="invalid-feedback">
+                            Por favor, ingrese una descripción.
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <label for="fecha" class="form-label">Fecha</label>
+                        <input type="date" class="form-control shadow-sm rounded" name="fecha" id="fecha" required>
+                        <div class="invalid-feedback">
+                            Por favor, ingrese la fecha.
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <label for="costo" class="form-label">Costo</label>
+                        <input type="number" step="0.01" class="form-control shadow-sm rounded" name="costo" id="costo" required>
+                        <div class="invalid-feedback">
+                            Por favor, ingrese el costo.
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-success" onclick="GuardarTratamiento()">Guardar</button>
+                <button type="button" class="btn btn-secondary" onclick="LimpiarDatos('frmTratamiento')">Limpiar</button>
+                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="card shadow">
+    <div class="card-header bg-info1 text-white">
+        <h5 class="mb-0">Lista de Tratamientos</h5>
+    </div>
+    <div class="card-body">
+        <div id="divContenedorTabla"></div>
+    </div>
+</div>
+
+<script src="~/js/generic.js"></script>
+<script src="~/js/tratamiento.js"></script>

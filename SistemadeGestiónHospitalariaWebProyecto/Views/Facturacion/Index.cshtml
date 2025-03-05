@@ -1,0 +1,88 @@
+﻿@{
+    ViewData["Title"] = "Facturación";
+}
+
+<h1 class="display-6 text-primary1 text-center fw-bold">Facturación</h1>
+
+<style>
+    .bg-info1 {
+        background-color: #8e74b6 !important;
+    }
+
+    .text-primary1 {
+        color: black !important;
+    }
+</style>
+
+<br />
+
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalFactura">
+    Agregar Factura
+</button>
+
+<br />
+<br />
+
+<!-- Modal para gestionar facturas -->
+<div class="modal fade" id="modalFactura" tabindex="-1" aria-labelledby="modalFacturaTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalFacturaTitle">Gestionar Factura</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="frmFactura" method="post" class="row g-3 needs-validation" novalidate>
+                    <div class="col-md-4">
+                        <label for="id" class="form-label">ID Factura</label>
+                        <input type="text" class="form-control" name="id" id="id" readonly>
+                    </div>
+                    <div class="col-md-4">
+                        <label for="pacienteId" class="form-label">Paciente</label>
+                        <select class="form-control" name="pacienteId" id="pacienteId" required>
+                            <option value="">Seleccione un paciente</option>
+                        </select>
+                        <div class="invalid-feedback">Seleccione un paciente.</div>
+                    </div>
+                    <div class="col-md-4">
+                        <label for="monto" class="form-label">Monto</label>
+                        <input type="number" class="form-control" name="monto" id="monto" required>
+                        <div class="invalid-feedback">Ingrese el monto.</div>
+                    </div>
+                    <div class="col-md-4">
+                        <label for="metodoPago" class="form-label">Método de Pago</label>
+                        <select class="form-control" name="metodoPago" id="metodoPago" required>
+                            <option value="">Seleccione un método</option>
+                            <option value="Efectivo">Efectivo</option>
+                            <option value="Tarjeta">Tarjeta</option>
+                            <option value="Transferencia">Transferencia</option>
+                        </select>
+                        <div class="invalid-feedback">Seleccione un método de pago.</div>
+                    </div>
+                    <div class="col-md-4">
+                        <label for="fechaPago" class="form-label">Fecha de Pago</label>
+                        <input type="date" class="form-control" name="fechaPago" id="fechaPago" required>
+                        <div class="invalid-feedback">Ingrese la fecha de pago.</div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-success" onclick="GuardarFactura()">Guardar</button>
+                <button type="button" class="btn btn-secondary" onclick="LimpiarDatos('frmFactura')">Limpiar</button>
+                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="card shadow">
+    <div class="card-header bg-info1 text-white">
+        <h5 class="mb-0">Lista de Facturas</h5>
+    </div>
+    <div class="card-body">
+        <div id="divContenedorTabla"></div>
+    </div>
+</div>
+
+<script src="~/js/generic.js"></script>
+<script src="~/js/facturacion.js"></script>

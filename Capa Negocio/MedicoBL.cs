@@ -8,7 +8,7 @@ namespace Capa_Negocio
     {
         public List<MedicosCLS> ListarMedicos()
         {
-
+            
             MedicosDAL obj = new MedicosDAL();
             return obj.ListarMedicos();
         }

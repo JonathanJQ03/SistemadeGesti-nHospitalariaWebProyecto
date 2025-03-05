@@ -2,12 +2,12 @@
     ViewData["Title"] = "Pacientes";
 }
 
-<h1 class="display-6 text-primary1 text-center fw-bold"> <i class="fa fa-wheelchair me-4" style="font-size:36px;"></i>Pacientes</h1></h1>
+<h1 class="display-6 text-primary1 text-center fw-bold"> Pacientes</h1>
 
 <style>
     .bg-info1 {
         --bs-bg-opacity: 1;
-        background-color: #3674B5 !important;
+        background-color: #8e74b6 !important;
     }
 
     .text-primary1 {
@@ -17,8 +17,8 @@
 
 <br />
 
-<button type="button" class="btn btn-outline-dark" data-bs-toggle="modal" data-bs-target="#exampleModalCenter">
-    <i class="fas fa-plus me-2"></i> Agregar Paciente
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModalCenter">
+    Agregar Paciente
 </button>
 
 <br />
@@ -42,28 +42,28 @@
                         <label for="nombre" class="form-label">Nombre</label>
                         <input type="text" class="form-control shadow-sm rounded" name="nombre" id="nombre" required>
                         <div class="invalid-feedback">
-                            Por favor, ingresar el nombre del paciente.
+                            Por favor, ingresa el nombre.
                         </div>
                     </div>
                     <div class="col-md-4">
                         <label for="apellido" class="form-label">Apellido</label>
                         <input type="text" class="form-control shadow-sm rounded" name="apellido" id="apellido" required>
                         <div class="invalid-feedback">
-                            Por favor, ingresa el apellido del paciente.
+                            Por favor, ingresa el apellido.
                         </div>
                     </div>
                     <div class="col-md-4">
                         <label for="fechaNacimiento" class="form-label">Fecha Nacimiento</label>
                         <input type="date" class="form-control shadow-sm rounded" name="fechaNacimiento" id="fechaNacimiento" required>
                         <div class="invalid-feedback">
-                            Por favor, ingresa la fecha de nacimiento del paciente.
+                            Por favor, ingresa la fecha de nacimiento.
                         </div>
                     </div>
                     <div class="col-md-4">
                         <label for="telefono" class="form-label">Teléfono</label>
                         <input type="text" class="form-control shadow-sm rounded" name="telefono" id="telefono" required>
                         <div class="invalid-feedback">
-                            Por favor, ingresa el teléfono del paciente.
+                            Por favor, ingresa el teléfono.
                         </div>
                     </div>
                     <div class="col-md-4">
@@ -77,15 +77,15 @@
                         <label for="direccion" class="form-label">Dirección</label>
                         <input type="text" class="form-control shadow-sm rounded" name="direccion" id="direccion" required>
                         <div class="invalid-feedback">
-                            Por favor, ingresa la dirección del paciente.
+                            Por favor, ingresa la dirección.
                         </div>
                     </div>
                 </form>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-outline-success" onclick="GuardarPaciente()">Guardar</button>
-                <button type="button" class="btn btn-outline-secondary" onclick="LimpiarDatos('frmPaciente')">Limpiar</button>
-                <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">Cerrar</button>
+                <button type="button" class="btn btn-success" onclick="GuardarPaciente()">Guardar</button>
+                <button type="button" class="btn btn-secondary" onclick="LimpiarDatos('frmPaciente')">Limpiar</button>
+                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cerrar</button>
             </div>
         </div>
     </div>
