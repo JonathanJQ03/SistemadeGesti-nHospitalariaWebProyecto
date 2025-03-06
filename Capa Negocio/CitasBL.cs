@@ -25,6 +25,23 @@ namespace Capa_Negocio
             CitasDAL obj = new CitasDAL();
             return obj.cargarMedicos();
         }
+        public int GuardarCita(CitasCLS oCitasCLS)
+        {
+            CitasDAL citaobj = new CitasDAL();
+            return citaobj.GuardarCita(oCitasCLS);
+        }
+
+        public CitasCLS ObtenerCita(int idCita)
+        {
+            CitasDAL obj = new CitasDAL();
+            return obj.ObtenerCita(idCita);
+        }
+
+        public int EliminarCita(int idCita)
+        {
+            CitasDAL obj = new CitasDAL();
+            return obj.EliminarCita(idCita);
+        }
 
     }
 }

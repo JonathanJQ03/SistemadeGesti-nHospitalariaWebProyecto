@@ -2,7 +2,7 @@
     ViewData["Title"] = "Pacientes";
 }
 
-<h1 class="display-6 text-primary1 text-center fw-bold"> Pacientes</h1>
+<h1 class="display-6 text-primary1 text-center fw-bold"><i class="fas fa-user-plus me-3"></i>Pacientes</h1>
 
 <style>
     .bg-info1 {
@@ -13,26 +13,30 @@
     .text-primary1 {
         color: black !important;
     }
+
+    #error-message {
+        display: none;
+        margin-top: 15px;
+    }
 </style>
 
-<br />
-
-<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModalCenter">
-    Agregar Paciente
+<button type="button" class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#pacienteModal">
+    <i class="fas fa-plus me-2"></i>Agregar Paciente
 </button>
 
-<br />
-<br />
-
 <!-- Modal -->
-<div class="modal fade" id="exampleModalCenter" tabindex="-1" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+<div class="modal fade" id="pacienteModal" tabindex="-1" aria-labelledby="pacienteModalTitle" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-lg">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLongTitle">Gestionar Paciente</h5>
+                <h5 class="modal-title" id="pacienteModalTitle">Gestionar Paciente</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
+
             <div class="modal-body">
+                <!-- Contenedor de mensajes de error -->
+                <div id="error-message" class="alert alert-danger"></div>
+
                 <form id="frmPaciente" method="post" class="row g-3 needs-validation" novalidate>
                     <div class="col-md-4">
                         <label for="idPaciente" class="form-label">Id Paciente</label>
@@ -61,9 +65,9 @@
                     </div>
                     <div class="col-md-4">
                         <label for="telefono" class="form-label">Teléfono</label>
-                        <input type="text" class="form-control shadow-sm rounded" name="telefono" id="telefono" required>
+                        <input type="tel" class="form-control shadow-sm rounded" name="telefono" id="telefono" required>
                         <div class="invalid-feedback">
-                            Por favor, ingresa el teléfono.
+                            Por favor, ingresa un teléfono válido (09XXXXXXXX).
                         </div>
                     </div>
                     <div class="col-md-4">
@@ -73,7 +77,7 @@
                             Por favor, ingresa un email válido.
                         </div>
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-md-12">
                         <label for="direccion" class="form-label">Dirección</label>
                         <input type="text" class="form-control shadow-sm rounded" name="direccion" id="direccion" required>
                         <div class="invalid-feedback">
@@ -83,9 +87,15 @@
                 </form>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-success" onclick="GuardarPaciente()">Guardar</button>
-                <button type="button" class="btn btn-secondary" onclick="LimpiarDatos('frmPaciente')">Limpiar</button>
-                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cerrar</button>
+                <button type="button" class="btn btn-success" onclick="GuardarPaciente()">
+                    <i class="fas fa-save me-2"></i>Guardar
+                </button>
+                <button type="button" class="btn btn-secondary" onclick="LimpiarDatos('frmPaciente')">
+                    <i class="fas fa-eraser me-2"></i>Limpiar
+                </button>
+                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">
+                    <i class="fas fa-times me-2"></i>Cerrar
+                </button>
             </div>
         </div>
     </div>
@@ -100,26 +110,25 @@
     </div>
 </div>
 <script>
-        (function () {
-        'use strict'
+    (function () {
+        'use strict';
 
-        // Obtener todos los formularios a los que queremos aplicar estilos de validación de Bootstrap personalizados
-        var forms = document.querySelectorAll('.needs-validation')
+        var forms = document.querySelectorAll('.needs-validation');
 
-        // Bucle sobre ellos y evitar el envío
         Array.prototype.slice.call(forms)
             .forEach(function (form) {
                 form.addEventListener('submit', function (event) {
                     if (!form.checkValidity()) {
-                        event.preventDefault()
-                        event.stopPropagation()
+                        event.preventDefault();
+                        event.stopPropagation();
                     }
-
-                    form.classList.add('was-validated')
-                }, false)
-            })
-    })()
+                    form.classList.add('was-validated');
+                }, false);
+            });
+    })();
 </script>
 
 <script src="~/js/generic.js"></script>
 <script src="~/js/paciente.js"></script>
+<script src="~/js/Validaciones.js"></script>
+

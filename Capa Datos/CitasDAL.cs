@@ -138,6 +138,92 @@ namespace Capa_Datos
             }
             return listaMedicos;
         }
+        
+         public int GuardarCita(CitasCLS oCitasCLS)
+        {
+            int respuesta = 0;
+            using (SqlConnection cn = new SqlConnection(this.cadena))
+            {
+                try
+                {
+                    cn.Open();
+                    using (SqlCommand cmd = new SqlCommand("uspGuardarCita", cn))
+                    {
+                        cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                        cmd.Parameters.AddWithValue("@id", oCitasCLS.id);
+                        cmd.Parameters.AddWithValue("@pacienteId", oCitasCLS.pacienteId);
+                        cmd.Parameters.AddWithValue("@medicoId", oCitasCLS.medicoID);
+                        cmd.Parameters.AddWithValue("@fechaHora", oCitasCLS.fechaHora == DateTime.MinValue ? (object)DBNull.Value : oCitasCLS.fechaHora);
+                        cmd.Parameters.AddWithValue("@estado", oCitasCLS.estado == null ? "" : oCitasCLS.estado);
+                            respuesta = cmd.ExecuteNonQuery();
+                    }
+                }
+                catch (Exception)
+                {
+                    cn.Close();
+                    respuesta = 0;
+                    throw;
+                }
+            }
+            return respuesta;
+         }
+        
+         public CitasCLS ObtenerCita(int idCita)
+            {
+                CitasCLS oCitasCLS = new CitasCLS();
+
+                using (SqlConnection cn = new SqlConnection(this.cadena))
+                    {
+                try
+                    {
+                    cn.Open();
+                    using (SqlCommand cmd = new SqlCommand("uspObtenerCita", cn))
+                    {
+                    cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@id", idCita);
+                SqlDataReader dr = cmd.ExecuteReader();
+                if (dr != null)
+                {
+                    while (dr.Read())
+                    {
+                        oCitasCLS.id = dr.IsDBNull(0) ? 0 : dr.GetInt32(0);
+                        oCitasCLS.pacienteId = dr.IsDBNull(1) ? 0 : dr.GetInt32(1);
+                        oCitasCLS.medicoID = dr.IsDBNull(2) ? 0 : dr.GetInt32(2);
+                        oCitasCLS.fechaHora = dr.IsDBNull(3) ? DateTime.MinValue : dr.GetDateTime(3);
+                        oCitasCLS.estado = dr.IsDBNull(4) ? "" : dr.GetString(4);
+                            }
+                        }
+                    }
+                }
+                        catch (Exception)
+                            {
+                        cn.Close();
+                            }
+                        }
+                    return oCitasCLS;
+                }
+        public int EliminarCita(int idCita)
+        {
+            int respuesta = 0;
+            using (SqlConnection cn = new SqlConnection(this.cadena))
+            {
+                try
+                {
+                    cn.Open();
+                    using (SqlCommand cmd = new SqlCommand("uspEliminarCita", cn))
+                    {
+                        cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                        cmd.Parameters.AddWithValue("@id", idCita);
+                        respuesta = cmd.ExecuteNonQuery();
+                    }
+                }
+                catch (Exception)
+                {
+                    cn.Close();
+                }
+            }
+            return respuesta;
+        }
 
     }
 }

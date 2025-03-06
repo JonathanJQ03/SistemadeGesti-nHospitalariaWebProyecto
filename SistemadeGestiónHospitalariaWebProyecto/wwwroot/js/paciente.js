@@ -4,7 +4,7 @@
 
 document.addEventListener('DOMContentLoaded', function () {
     // Obtener el modal
-    var modal = document.getElementById('exampleModalCenter');
+    var modal = document.getElementById('pacienteModal');
 
     // Verificar si el modal existe antes de añadir el event listener
     if (modal) {
@@ -62,20 +62,20 @@ function GuardarPaciente() {
         ListarPacientes();
 
         // Cerrar modal correctamente
-        var myModal = bootstrap.Modal.getInstance(document.getElementById('exampleModalCenter'));
+        var myModal = bootstrap.Modal.getInstance(document.getElementById('pacienteModal'));
         if (myModal) myModal.hide();
     });
 }
 
 function MostrarModal() {
     LimpiarDatos("frmPaciente");
-    var myModal = new bootstrap.Modal(document.getElementById('exampleModalCenter'));
+    var myModal = new bootstrap.Modal(document.getElementById('pacienteModal'));
     myModal.show();
 }
 
 function Editar(id) {
     fetchGet("Pacientes/ObtenerPaciente/?idPaciente=" + id, "json", function (data) {
-        setN("idPaciente", data.idPaciente);  // Corrección del error de referencia
+        setN("idPaciente", data.idPaciente);  
         setN("nombre", data.nombre);
         setN("apellido", data.apellido);
         setN("fechaNacimiento", data.fechaNacimiento);

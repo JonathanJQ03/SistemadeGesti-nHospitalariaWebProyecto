@@ -28,5 +28,23 @@ namespace SistemadeGestiónHospitalariaWebProyecto.Controllers
             var medicos = obj.CargarMedicos();
             return Json(medicos);
         }
+        public int GuardarCita(CitasCLS oCitasCLS)
+        {
+            CitasBL citaobj = new CitasBL();
+            return citaobj.GuardarCita(oCitasCLS);
+        }
+
+        public CitasCLS ObtenerCita(int idCita)
+        {
+            CitasBL obj = new CitasBL();
+            return obj.ObtenerCita(idCita);
+        }
+
+        public int EliminarCita(int idCita)
+        {
+            CitasBL obj = new CitasBL();
+            return obj.EliminarCita(idCita);
+        }
+
     }
 }

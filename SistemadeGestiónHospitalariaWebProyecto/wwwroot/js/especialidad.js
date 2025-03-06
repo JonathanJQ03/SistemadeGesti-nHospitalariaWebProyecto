@@ -22,9 +22,9 @@ async function ListarEspecialidades() {
         cabeceras: ["Id Especialidad", "Nombre"],
         propiedades: ["especialidadId", "nombre"],
         divContenedorTabla: "divContenedorTabla",
-        editar: true,
-        eliminar: true,
-        propiedadID: "idespecialidadId
+        editar: false,
+        eliminar: false,
+        propiedadID: "especialidadId"
     }
 
     pintar(objEspecialidades);

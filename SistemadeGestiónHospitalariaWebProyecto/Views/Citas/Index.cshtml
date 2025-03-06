@@ -2,7 +2,9 @@
     ViewData["Title"] = "Citas";
 }
 
-<h1 class="display-6 text-primary1 text-center fw-bold"><i class="fas fa-notes-medical me-4" style="font-size:36px;"></i>Citas</h1>
+<h1 class="display-6 text-primary1 text-center fw-bold">
+    <i class="fas fa-notes-medical me-4" style="font-size:36px;"></i>Citas
+</h1>
 
 <style>
     .bg-info1 {
@@ -17,6 +19,7 @@
 
 <br />
 
+<!-- Botón para abrir el modal -->
 <button type="button" class="btn btn-outline-dark" data-bs-toggle="modal" data-bs-target="#modalCita">
     <i class="fas fa-plus me-2"></i> Agregar Cita
 </button>
@@ -33,31 +36,37 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
+                <!-- Formulario de citas -->
                 <form id="frmCita" method="post" class="row g-3 needs-validation" novalidate>
+                    <!-- ID de la cita (oculto o readonly) -->
                     <div class="col-md-4">
                         <label for="idCita" class="form-label">Id Cita</label>
                         <input type="text" class="form-control shadow-sm rounded" name="idCita" id="idCita" readonly>
                     </div>
+
+                    <!-- Dropdown de pacientes -->
                     <div class="col-md-4">
                         <label for="pacienteId" class="form-label">Paciente</label>
                         <select class="form-control shadow-sm rounded" name="pacienteId" id="pacienteId" required>
-                            <!-- Opciones de pacientes se cargarán dinámicamente -->
                             <option value="">Seleccione un paciente</option>
                         </select>
                         <div class="invalid-feedback">
                             Por favor, seleccione un paciente.
                         </div>
                     </div>
+
+                    <!-- Dropdown de médicos -->
                     <div class="col-md-4">
                         <label for="medicoId" class="form-label">Médico</label>
                         <select class="form-control shadow-sm rounded" name="medicoId" id="medicoId" required>
-                            <!-- Opciones de médicos se cargarán dinámicamente -->
                             <option value="">Seleccione un médico</option>
                         </select>
                         <div class="invalid-feedback">
                             Por favor, seleccione un médico.
                         </div>
                     </div>
+
+                    <!-- Campo de fecha y hora -->
                     <div class="col-md-4">
                         <label for="fechaHora" class="form-label">Fecha y Hora</label>
                         <input type="datetime-local" class="form-control shadow-sm rounded" name="fechaHora" id="fechaHora" required>
@@ -65,6 +74,8 @@
                             Por favor, ingrese la fecha y hora.
                         </div>
                     </div>
+
+                    <!-- Dropdown de estado -->
                     <div class="col-md-4">
                         <label for="estado" class="form-label">Estado</label>
                         <select class="form-control shadow-sm rounded" name="estado" id="estado" required>
@@ -88,6 +99,7 @@
     </div>
 </div>
 
+<!-- Tabla de citas -->
 <div class="card shadow">
     <div class="card-header bg-info1 text-white">
         <h5 class="mb-0">Lista de Citas</h5>
@@ -97,5 +109,7 @@
     </div>
 </div>
 
+<!-- Scripts -->
 <script src="~/js/generic.js"></script>
 <script src="~/js/citas.js"></script>
+<script src="~/js/Validaciones.js"></script>

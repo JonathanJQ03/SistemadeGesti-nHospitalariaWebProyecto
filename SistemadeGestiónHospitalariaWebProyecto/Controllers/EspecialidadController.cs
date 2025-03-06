@@ -22,15 +22,5 @@ namespace SistemadeGestiónHospitalariaWebProyecto.Controllers
             EspecialidadBL obj = new EspecialidadBL();
             return obj.GuardarEspecialidad(oEspecialidadCLS);
         }
-        public EspecialidadCLS ObtenerEspecialidad(int id)
-        {
-            EspecialidadBL obj = new EspecialidadBL();
-            return obj.ObtenerEspecialidad(id);
-        }
-        public int EliminarEspecialidad(int id)
-        {
-            EspecialidadBL obj = new EspecialidadBL();
-            return obj.EliminarEspecialidad(id);
-        }
     }
 }

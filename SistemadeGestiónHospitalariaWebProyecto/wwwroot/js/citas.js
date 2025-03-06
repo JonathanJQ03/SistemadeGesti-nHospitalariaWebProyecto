@@ -71,8 +71,60 @@ function cargarMedicos() {
         });
     });
 }
+function GuardarCita() {
+    let form = document.getElementById("frmCita");
 
+    // Verificar si el formulario es válido
+    if (!form.checkValidity()) {
+        form.classList.add('was-validated'); // Mostrar mensajes de error
+        return; // Detener la ejecución si el formulario no es válido
+    }
 
+    // Si el formulario es válido, proceder con el envío de datos
+    let frm = new FormData(form);
+
+    fetchPost("Citas/GuardarCita", "text", frm, function (res) {
+        LimpiarDatos("frmCita");
+        Exito("Cita guardada con éxito");
+        ListarCitas();
+
+        // Cerrar modal correctamente
+        var myModal = bootstrap.Modal.getInstance(document.getElementById('modalCita'));
+        if (myModal) myModal.hide();
+    });
+}
+
+function Editar(id) {
+    fetchGet("Citas/ObtenerCita/?id=" + id, "json", function (data) {
+        setN("id", data.id);
+        setN("pacienteId", data.pacienteId);
+        setN("medicoId", data.medicoId);
+        setN("fechaHora", data.fechaHora);
+        setN("estado", data.estado);
+
+        // Mostrar el modal
+        var myModal = new bootstrap.Modal(document.getElementById('modalCita'));
+        myModal.show();
+    });
+}
+
+function Eliminar(id) {
+    fetchGet("Citas/ObtenerCita/?id=" + id, "json", function (data) {
+        Confirmar(undefined, "¿Desea eliminar la cita programada para el " + data.fechaHora + "?", function () {
+            fetchGet("Citas/EliminarCita/?id=" + id, "text", function (r) {
+                Exito("Cita eliminada con éxito.");
+                ListarCitas();
+            });
+        });
+    });
+}
+function LimpiarDatos(formId) {
+    let form = document.getElementById(formId);
+    if (form) {
+        form.reset();
+        form.classList.remove('was-validated'); // Limpiar validación
+    }
+}
 function MostrarModal() {
     LimpiarDatos("frmCita");
     var myModal = new bootstrap.Modal(document.getElementById('exampleModalCenter'));
