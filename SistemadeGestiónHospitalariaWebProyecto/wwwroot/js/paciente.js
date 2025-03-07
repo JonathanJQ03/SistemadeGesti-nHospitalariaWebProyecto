@@ -98,3 +98,25 @@ function Eliminar(id) {
         });
     });
 }
+
+function validarNombre(input) {
+    let regex = /^[^0-9]+$/;
+    if (!regex.test(input.value)) {
+        input.value = input.value.replace(/[0-9]/g, ''); // Elimina números en tiempo real
+
+    }
+
+} 
+
+function validarTelefono(input) {
+    let telefono = document.getElementById("telefono").value.trim();
+    let regex = /^09\d{8}$/;
+
+    if (!regex.test(telefono)) {
+        alert("El número debe comenzar con 09 y tener exactamente 10 dígitos.");
+        return false;
+    }
+
+    alert("Número válido.");
+    return true;
+}

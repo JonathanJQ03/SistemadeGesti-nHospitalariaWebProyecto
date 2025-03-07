@@ -54,10 +54,13 @@
                         </div>
                     </div>
                     <div class="col-md-4">
-                        <label for="especialidadId" class="form-label">Id Especialidad</label>
-                        <input type="text" class="form-control shadow-sm rounded" name="especialidadId" id="especialidadId" required>
+                        <label for="especialidadId" class="form-label">Especialidad</label>
+                        <select class="form-control shadow-sm rounded" name="especialidadId" id="especialidadId" required>
+                            <!-- Opciones de médicos se cargarán dinámicamente -->
+                            <option value="">Seleccione una especialidad</option>
+                        </select>
                         <div class="invalid-feedback">
-                            Por favor, ingresa el Id de Especialidad.
+                            Por favor, seleccione una .
                         </div>
                     </div>
                     <div class="col-md-4">

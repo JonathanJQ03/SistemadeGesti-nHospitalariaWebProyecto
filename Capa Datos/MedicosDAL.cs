@@ -54,30 +54,45 @@ namespace Capa_Datos
             }
             return listaMedicos;
         }
-        
+
         public int GuardarMedico(MedicosCLS oMedicoCLS)
         {
+            if (oMedicoCLS == null)
+            {
+                throw new ArgumentNullException(nameof(oMedicoCLS), "El objeto médico no puede ser nulo.");
+            }
+
             int respuesta = 0;
+
             using (SqlConnection cn = new SqlConnection(this.cadena))
             {
                 try
                 {
                     cn.Open();
+                    EspecialidadDAL especialidadDAL = new EspecialidadDAL();
+                    int especialidadId = 0;
+
+                    especialidadId = especialidadDAL.ObtenerEspecialidadPorNombre(oMedicoCLS.especialidadNombre);
+                    
+
                     using (SqlCommand cmd = new SqlCommand("uspGuardarMedico", cn))
                     {
                         cmd.CommandType = System.Data.CommandType.StoredProcedure;
+
                         cmd.Parameters.AddWithValue("@id", oMedicoCLS.idMedico);
-                        cmd.Parameters.AddWithValue("@nombre", oMedicoCLS.nombre == null ? "" : oMedicoCLS.nombre);
-                        cmd.Parameters.AddWithValue("@apellido", oMedicoCLS.apellido == null ? "" : oMedicoCLS.apellido);
-                        cmd.Parameters.AddWithValue("@especialidadId", oMedicoCLS.especialidadId);
-                        cmd.Parameters.AddWithValue("@telefono", oMedicoCLS.telefono == null ? "" : oMedicoCLS.telefono);
-                        cmd.Parameters.AddWithValue("@email", oMedicoCLS.email == null ? "" : oMedicoCLS.email);
+                        cmd.Parameters.AddWithValue("@nombre", oMedicoCLS.nombre ?? string.Empty);
+                        cmd.Parameters.AddWithValue("@apellido", oMedicoCLS.apellido ?? string.Empty);
+                        cmd.Parameters.AddWithValue("@especialidadId", especialidadId);
+                        cmd.Parameters.AddWithValue("@telefono", oMedicoCLS.telefono ?? string.Empty);
+                        cmd.Parameters.AddWithValue("@email", oMedicoCLS.email ?? string.Empty);
+
                         respuesta = cmd.ExecuteNonQuery();
                     }
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
-                    cn.Close();
+                    // Se recomienda registrar el error en logs en un sistema real
+                    Console.WriteLine("Error al guardar el médico: " + ex.Message);
                     respuesta = 0;
                     throw;
                 }
@@ -85,44 +100,47 @@ namespace Capa_Datos
             return respuesta;
         }
 
-        public List<EspecialidadCLS> cargarEspecialidad()
-        {
-            List<EspecialidadCLS> listaEspecialidades = new List<EspecialidadCLS>();
 
-            using (SqlConnection cn = new SqlConnection(this.cadena))
+
+            public List<EspecialidadCLS> cargarEspecialidad()
             {
-                try
+                List<EspecialidadCLS> listaEspecialidades = new List<EspecialidadCLS>();
+
+
+                using (SqlConnection cn = new SqlConnection(this.cadena))
                 {
-                    cn.Open();
-                    using (SqlCommand cmd = new SqlCommand("uspListarEspecialidades", cn))
+                    try
                     {
-                        cmd.CommandType = CommandType.StoredProcedure;
-
-                        using (SqlDataReader dr = cmd.ExecuteReader())  // Se encierra en using para liberar recursos
+                        cn.Open();
+                        using (SqlCommand cmd = new SqlCommand("uspListarEspecialidades", cn))
                         {
-                            while (dr.Read())
+                            cmd.CommandType = CommandType.StoredProcedure;
+
+                            using (SqlDataReader dr = cmd.ExecuteReader())  // Se encierra en using para liberar recursos
                             {
-                                EspecialidadCLS oEspecialidadCLS = new EspecialidadCLS
+                                while (dr.Read())
                                 {
+                                    EspecialidadCLS oEspecialidadCLS = new EspecialidadCLS
+                                    {
 
-                                    especialidadId = dr.IsDBNull(0) ? 0 : dr.GetInt32(0),
-                                    nombre = dr.IsDBNull(1) ? "" : dr.GetString(1),
-                                };
+                                        especialidadId = dr.IsDBNull(0) ? 0 : dr.GetInt32(0),
+                                        nombre = dr.IsDBNull(1) ? "" : dr.GetString(1),
+                                    };
 
-                                listaEspecialidades.Add(oEspecialidadCLS);
+                                    listaEspecialidades.Add(oEspecialidadCLS);
+                                }
                             }
                         }
                     }
+                    catch (Exception ex)
+                    {
+                        // Se recomienda registrar el error en logs
+                        Console.WriteLine("Error: " + ex.Message);
+                        listaEspecialidades = null;
+                    }
                 }
-                catch (Exception ex)
-                {
-                    // Se recomienda registrar el error en logs
-                    Console.WriteLine("Error: " + ex.Message);
-                    listaEspecialidades = null;
-                }
+                return listaEspecialidades;
             }
-            return listaEspecialidades;
-        }
 
     }
 }

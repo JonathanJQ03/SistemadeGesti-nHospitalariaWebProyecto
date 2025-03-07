@@ -44,14 +44,14 @@
                     </div>
                     <div class="col-md-4">
                         <label for="nombre" class="form-label">Nombre</label>
-                        <input type="text" class="form-control shadow-sm rounded" name="nombre" id="nombre" required>
+                        <input type="text" class="form-control shadow-sm rounded" oninput="validarNombre(this)" name="nombre" id="nombre" required>
                         <div class="invalid-feedback">
                             Por favor, ingresa el nombre.
                         </div>
                     </div>
                     <div class="col-md-4">
                         <label for="apellido" class="form-label">Apellido</label>
-                        <input type="text" class="form-control shadow-sm rounded" name="apellido" id="apellido" required>
+                        <input type="text" class="form-control shadow-sm rounded" oninput="validarNombre(this)" name="apellido" id="apellido" required>
                         <div class="invalid-feedback">
                             Por favor, ingresa el apellido.
                         </div>
@@ -65,7 +65,19 @@
                     </div>
                     <div class="col-md-4">
                         <label for="telefono" class="form-label">Teléfono</label>
-                        <input type="tel" class="form-control shadow-sm rounded" name="telefono" id="telefono" required>
+                        <input type="tel" class="form-control shadow-sm rounded" name="telefono" id="telefono" maxlength="10" required>
+                        <script>
+                            document.getElementById("telefono").addEventListener("blur", function () {
+                                let telefono = this.value.trim();
+                                let regex = /^09\d{8}$/;
+
+                                if (!regex.test(telefono)) {
+                                    alert("El número debe comenzar con 09 y tener exactamente 10 dígitos.");
+                                    this.value = ""; // Borra el valor si es incorrecto
+                                    this.focus(); // Mantiene el foco en el input hasta que se corrija
+                                }
+                            });
+                        </script>
                         <div class="invalid-feedback">
                             Por favor, ingresa un teléfono válido (09XXXXXXXX).
                         </div>
@@ -79,7 +91,7 @@
                     </div>
                     <div class="col-md-12">
                         <label for="direccion" class="form-label">Dirección</label>
-                        <input type="text" class="form-control shadow-sm rounded" name="direccion" id="direccion" required>
+                        <input type="text" class="form-control shadow-sm rounded" oninput="validarNombre(this)" name="direccion" id="direccion" required>
                         <div class="invalid-feedback">
                             Por favor, ingresa la dirección.
                         </div>

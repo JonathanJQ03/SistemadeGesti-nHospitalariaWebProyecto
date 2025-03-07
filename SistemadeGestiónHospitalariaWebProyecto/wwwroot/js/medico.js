@@ -34,7 +34,7 @@ async function ListarMedicos() {
 
     objMedicos = {
         url: "Medicos/ListarMedicos",
-        cabeceras: ["Id Médico", "Nombre", "Apellido", "Id Especialidad", "Telefono", "Correo Electronico"],
+        cabeceras: ["Id Médico", "Nombre", "Apellido", "Especialidad", "Telefono", "Correo Electronico"],
         propiedades: ["idMedico", "nombre", "apellido", "especialidadId", "telefono", "email"],
         divContenedorTabla: "divContenedorTabla",
         propiedadID: "idMedico",

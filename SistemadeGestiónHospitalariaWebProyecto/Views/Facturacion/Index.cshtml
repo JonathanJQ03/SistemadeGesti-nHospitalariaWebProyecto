@@ -37,12 +37,15 @@
                         <label for="id" class="form-label">ID Factura</label>
                         <input type="text" class="form-control" name="id" id="id" readonly>
                     </div>
+                    <!-- Dropdown de pacientes -->
                     <div class="col-md-4">
                         <label for="pacienteId" class="form-label">Paciente</label>
-                        <select class="form-control" name="pacienteId" id="pacienteId" required>
+                        <select class="form-control shadow-sm rounded" name="pacienteId" id="pacienteId" required>
                             <option value="">Seleccione un paciente</option>
                         </select>
-                        <div class="invalid-feedback">Seleccione un paciente.</div>
+                        <div class="invalid-feedback">
+                            Por favor, seleccione un paciente.
+                        </div>
                     </div>
                     <div class="col-md-4">
                         <label for="monto" class="form-label">Monto</label>

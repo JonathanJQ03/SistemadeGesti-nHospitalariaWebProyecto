@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
@@ -51,6 +52,50 @@ namespace Capa_Datos
             }
             return listaTratamientos;
         }
+        public List<PacientesCLS> cargarPacientes()
+        {
+            List<PacientesCLS> listaPacientes = null;
+            using (SqlConnection cn = new SqlConnection(this.cadena))
+            {
+                try
+                {
+                    cn.Open();
+                    using (SqlCommand cmd = new SqlCommand("uspListarPacientes", cn))
+                    {
+                        cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                        SqlDataReader dr = cmd.ExecuteReader();
+                        if (dr != null)
+                        {
+                            PacientesCLS oPacienteCLS;
+                            listaPacientes = new List<PacientesCLS>();
+                            while (dr.Read())
+                            {
+                                oPacienteCLS = new PacientesCLS();
+                                oPacienteCLS.idPaciente = dr.IsDBNull(0) ? 0 : dr.GetInt32(0);  // Id
+                                oPacienteCLS.nombre = dr.IsDBNull(1) ? "" : dr.GetString(1);    // Nombre
+                                oPacienteCLS.apellido = dr.IsDBNull(2) ? "" : dr.GetString(2);  // Apellido
+                                                                                                // Puedes agregar las otras propiedades si las necesitas
+                                oPacienteCLS.fechaNacimiento = dr.IsDBNull(3) ? DateTime.MinValue : dr.GetDateTime(3);
+                                oPacienteCLS.telefono = dr.IsDBNull(4) ? "" : dr.GetString(4);
+                                oPacienteCLS.email = dr.IsDBNull(5) ? "" : dr.GetString(5);
+                                oPacienteCLS.direccion = dr.IsDBNull(6) ? "" : dr.GetString(6);
+
+                                listaPacientes.Add(oPacienteCLS);
+                            }
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    cn.Close();
+                    listaPacientes = null;
+
+                    throw;
+                }
+            }
+            return listaPacientes;
+        }
+
         public int GuardarTratamiento(TratamientosCLS oTratamientoCLS)
         {
             int respuesta = 0;
@@ -79,9 +124,11 @@ namespace Capa_Datos
             return respuesta;
         }
 
+        
         public TratamientosCLS ObtenerTratamiento(int idTratamiento)
         {
-            TratamientosCLS oTratamientoCLS = new TratamientosCLS();
+            TratamientosCLS oTratamientosCLS = new TratamientosCLS();
+
             using (SqlConnection cn = new SqlConnection(this.cadena))
             {
                 try
@@ -96,12 +143,11 @@ namespace Capa_Datos
                         {
                             while (dr.Read())
                             {
-
-                                oTratamientoCLS.idTratamiento = dr.IsDBNull(0) ? 0 : dr.GetInt32(0);
-                                oTratamientoCLS.pacienteId = dr.IsDBNull(1) ? 0 : dr.GetInt32(1);
-                                oTratamientoCLS.descripcion = dr.IsDBNull(2) ? "" : dr.GetString(2);
-                                oTratamientoCLS.fecha = dr.IsDBNull(3) ? DateTime.MinValue : dr.GetDateTime(3);
-                                oTratamientoCLS.costo = dr.IsDBNull(4) ? 0 : dr.GetDecimal(4);
+                                oTratamientosCLS.idTratamiento = dr.IsDBNull(0) ? 0 : dr.GetInt32(0);
+                                oTratamientosCLS.pacienteId = dr.IsDBNull(1) ? 0 : dr.GetInt32(1);
+                                oTratamientosCLS.descripcion = dr.IsDBNull(1) ? "" : dr.GetString(1);
+                                oTratamientosCLS.fecha = dr.IsDBNull(3) ? DateTime.MinValue : dr.GetDateTime(3);
+                                oTratamientosCLS.costo = dr.IsDBNull(4) ? 0 : dr.GetDecimal(4);
                             }
                         }
                     }
@@ -109,11 +155,33 @@ namespace Capa_Datos
                 catch (Exception)
                 {
                     cn.Close();
-
                 }
             }
-            return oTratamientoCLS;
+            return oTratamientosCLS;
         }
-        
+        public int EliminarCita(int idCita)
+        {
+            int respuesta = 0;
+            using (SqlConnection cn = new SqlConnection(this.cadena))
+            {
+                try
+                {
+                    cn.Open();
+                    using (SqlCommand cmd = new SqlCommand("uspEliminarCita", cn))
+                    {
+                        cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                        cmd.Parameters.AddWithValue("@id", idCita);
+                        respuesta = cmd.ExecuteNonQuery();
+                    }
+                }
+                catch (Exception)
+                {
+                    cn.Close();
+                }
+            }
+            return respuesta;
+        }
+
+
     }
 }

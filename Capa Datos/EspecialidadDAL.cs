@@ -114,6 +114,36 @@ namespace Capa_Datos
             return oEspecialidadCLS;
 
         }
+        public int ObtenerEspecialidadPorNombre(string nombreEspecialidad)
+        {
+            int especialidadId = 0;
+            using (SqlConnection cn = new SqlConnection(this.cadena))
+            {
+                try
+                {
+                    cn.Open();
+                    using (SqlCommand cmd = new SqlCommand("uspObtenerEspecialidadPorNombre", cn))
+                    {
+                        cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                        cmd.Parameters.AddWithValue("@nombreEspecialidad", nombreEspecialidad);
+
+                        object result = cmd.ExecuteScalar();
+                        if (result != null)
+                        {
+                            especialidadId = Convert.ToInt32(result);
+                        }
+                    }
+                }
+                catch (Exception)
+                {
+                    cn.Close();
+                    throw;
+                }
+            }
+            return especialidadId;
+        }
+
+
         public int EliminarEspecialidad(int especialidadId)
         {
             int respuesta = 0;

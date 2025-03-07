@@ -32,6 +32,20 @@ async function ListarFacturacion() {
     pintar(objFacturas);
 }
 
+function cargarPacientes() {
+    console.log("Cargando pacientes..."); // Añade esta línea
+    fetchGet("Facturacion/CargarPacientes", "json", function (data) {
+        console.log("Pacientes recibidos:", data); // Y esta línea
+        let selectPacientes = document.getElementById("pacienteId");
+        selectPacientes.innerHTML = "<option value=''>Seleccione un paciente</option>";
+        data.forEach(function (paciente) {
+            let option = document.createElement("option");
+            option.value = paciente.idPaciente;
+            option.text = paciente.nombre + " " + paciente.apellido;
+            selectPacientes.appendChild(option);
+        });
+    });
+}
 function GuardarFactura() {
     let form = document.getElementById("frmFactura");
     let frm = new FormData(form);
@@ -45,11 +59,7 @@ function GuardarFactura() {
     });
 }
 
-function MostrarModal() {
-    LimpiarDatos("frmFactura");
-    var myModal = new bootstrap.Modal(document.getElementById('modalFactura'));
-    myModal.show();
-}
+
 
 function Editar(id) {
     fetchGet("Facturacion/ObtenerFactura/?id=" + id, "json", function (data) {
@@ -62,6 +72,12 @@ function Editar(id) {
         var myModal = new bootstrap.Modal(document.getElementById('modalFactura'));
         myModal.show();
     });
+}
+
+function MostrarModal() {
+    LimpiarDatos("frmFactura");
+    var myModal = new bootstrap.Modal(document.getElementById('modalFactura'));
+    myModal.show();
 }
 
 

@@ -24,13 +24,29 @@ async function ListarTratamientos() {
     objTratamientos = {
         url: "Tratamientos/ListarTratamientos",
         cabeceras: ["Id Tratamiento", "Id Paciente", "Descripción", "Fecha", "Costo"],
-        propiedades: ["idTratamiento", "pacienteId", "descripcion", "fecha", "costo"],
+        propiedades: ["idTratamiento", "idPaciente", "descripcion", "fecha", "costo"],
         divContenedorTabla: "divContenedorTabla",
         editar: true,
         eliminar: true,
         propiedadID: "idTratamiento"
     };
     pintar(objTratamientos);
+}
+
+
+function cargarPacientes() {
+    console.log("Cargando pacientes..."); // Añade esta línea
+    fetchGet("Tratamientos/CargarPacientes", "json", function (data) {
+        console.log("Pacientes recibidos:", data); // Y esta línea
+        let selectPacientes = document.getElementById("pacienteId");
+        selectPacientes.innerHTML = "<option value=''>Seleccione un paciente</option>";
+        data.forEach(function (paciente) {
+            let option = document.createElement("option");
+            option.value = paciente.idPaciente;
+            option.text = paciente.nombre + " " + paciente.apellido;
+            selectPacientes.appendChild(option);
+        });
+    });
 }
 
 function GuardarTratamiento() {
@@ -47,10 +63,22 @@ function GuardarTratamiento() {
     });
 }
 
-function MostrarModal() {
-    LimpiarDatos("frmTratamiento");
-    var myModal = new bootstrap.Modal(document.getElementById('exampleModalCenter'));
-    myModal.show();
+function Eliminar(id) {
+    fetchGet("Tratamientos/ObtenerTratamiento/?id=" + id, "json", function (data) {
+        Confirmar(undefined, "¿Desea eliminar El tratamiento programada para el " + data.fechaHora + "?", function () {
+            fetchGet("Tratamientos/EliminarTratamiento/?id=" + id, "text", function (r) {
+                Exito("Trtamiento eliminado con éxito.");
+                ListarCitas();
+            });
+        });
+    });
+}
+function LimpiarDatos(formId) {
+    let form = document.getElementById(formId);
+    if (form) {
+        form.reset();
+        form.classList.remove('was-validated'); // Limpiar validación
+    }
 }
 
 function Editar(id) {
@@ -66,3 +94,8 @@ function Editar(id) {
     });
 }
 
+function MostrarModal() {
+    LimpiarDatos("frmTratamiento");
+    var myModal = new bootstrap.Modal(document.getElementById('exampleModalCenter'));
+    myModal.show();
+}

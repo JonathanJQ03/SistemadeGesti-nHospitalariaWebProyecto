@@ -23,10 +23,11 @@ namespace SistemadeGestiónHospitalariaWebProyecto.Controllers
             return tratamientoobj.GuardarTratamiento(oTratamientoCLS);
         }
 
-        public TratamientosCLS ObtenerTratamiento(int idTratamiento)
+        public JsonResult CargarPacientes()
         {
             TratamientoBL obj = new TratamientoBL();
-            return obj.ObtenerTratamiento(idTratamiento);
+            var pacientes = obj.CargarPacientes();
+            return Json(pacientes);
         }
     }
 }

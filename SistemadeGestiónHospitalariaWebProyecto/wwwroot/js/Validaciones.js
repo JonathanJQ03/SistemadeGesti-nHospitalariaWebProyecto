@@ -6,6 +6,12 @@
         return;
     }
 
+    form.addEventListener('blur', function (event) {
+
+
+    }
+    
+
     // Validaciones específicas para el formulario de pacientes
     form.addEventListener('submit', function (event) {
         event.preventDefault(); // Evita el envío del formulario para validar primero

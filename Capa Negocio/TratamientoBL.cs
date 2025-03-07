@@ -10,16 +10,23 @@ namespace Capa_Negocio
             TratamientosDAL obj = new TratamientosDAL();
             return obj.ListarTratamientos();
         }
+        
+        public List<PacientesCLS> CargarPacientes()
+        {
+            TratamientosDAL obj = new TratamientosDAL();
+            return obj.cargarPacientes();
+        }
+
         public int GuardarTratamiento(TratamientosCLS oTratamientoCLS)
         {
             TratamientosDAL tratamientoobj = new TratamientosDAL();
             return tratamientoobj.GuardarTratamiento(oTratamientoCLS);
         }
-        public TratamientosCLS ObtenerTratamiento(int idTratamiento)
+
+        public TratamientosCLS ObtenerTratamiento(int idCita)
         {
             TratamientosDAL obj = new TratamientosDAL();
-            return obj.ObtenerTratamiento(idTratamiento);
+            return obj.ObtenerTratamiento(idCita);
         }
-        
     }
 }

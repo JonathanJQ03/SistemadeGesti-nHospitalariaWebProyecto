@@ -23,7 +23,14 @@ namespace SistemadeGestiónHospitalariaWebProyecto.Controllers
             return obj.GuardarFacturacion(oFacturacionCLS);
         }
 
-        
+        public JsonResult CargarPacientes()
+        {
+            TratamientoBL obj = new TratamientoBL();
+            var pacientes = obj.CargarPacientes();
+            return Json(pacientes);
+        }
+
+
     }
 
 }
