@@ -74,16 +74,15 @@ function MostrarModal() {
 }
 
 function Editar(id) {
-    fetchGet("Pacientes/ObtenerPaciente/?idPaciente=" + id, "json", function (data) {
-        setN("idPaciente", data.idPaciente);  
-        setN("nombre", data.nombre);
-        setN("apellido", data.apellido);
-        setN("fechaNacimiento", data.fechaNacimiento);
-        setN("telefono", data.telefono);
-        setN("email", data.email);
-        setN("direccion", data.direccion);
+    fetchGet("Citas/ObtenerCita/?id=" + id, "json", function (data) {
+        
+        setN("idCita", data.id);
+        setN("pacienteId", data.pacienteId);
+        setN("medicoId", data.medicoId);
+        setN("fechaHora", data.fechaHora);
+        setN("estado", data.estado);
 
-        var myModal = new bootstrap.Modal(document.getElementById('exampleModalCenter'));
+        var myModal = new bootstrap.Modal(document.getElementById('modalCita'));
         myModal.show();
     });
 }

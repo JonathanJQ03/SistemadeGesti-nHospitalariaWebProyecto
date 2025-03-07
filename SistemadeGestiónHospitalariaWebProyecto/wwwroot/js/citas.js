@@ -5,10 +5,9 @@
 }
 
 document.addEventListener('DOMContentLoaded', function () {
-    const modal = document.getElementById('modalCita'); // Usa el ID correcto
+    const modal = document.getElementById('modalCita');
     if (modal) {
         modal.addEventListener('hidden.bs.modal', function () {
-            // Asegurarse de que el backdrop se elimine
             if (document.querySelector('.modal-backdrop')) {
                 document.querySelector('.modal-backdrop').remove();
             }
@@ -20,6 +19,7 @@ document.addEventListener('DOMContentLoaded', function () {
         console.error('El modal con ID "modalCita" no se encontró en el DOM.');
     }
 });
+
 
 let objCitas;
 async function ListarCitas() {
@@ -38,9 +38,9 @@ async function ListarCitas() {
 }
 
 function cargarPacientes() {
-    console.log("Cargando pacientes..."); // Añade esta línea
+    console.log("Cargando pacientes..."); 
     fetchGet("Citas/CargarPacientes", "json", function (data) {
-        console.log("Pacientes recibidos:", data); // Y esta línea
+        console.log("Pacientes recibidos:", data); 
         let selectPacientes = document.getElementById("pacienteId");
         selectPacientes.innerHTML = "<option value=''>Seleccione un paciente</option>";
         data.forEach(function (paciente) {
@@ -55,7 +55,7 @@ function cargarMedicos() {
     console.log("Intentando cargar médicos...");
 
     fetchGet("Citas/CargarMedicos", "json", function (data) {
-        console.log("Datos recibidos:", data); // Para verificar la respuesta
+        console.log("Datos recibidos:", data); 
         let selectMedicos = document.getElementById("medicoId");
         selectMedicos.innerHTML = "<option value=''>Seleccione un médico</option>";
         if (data.length === 0) {
@@ -74,13 +74,13 @@ function cargarMedicos() {
 function GuardarCita() {
     let form = document.getElementById("frmCita");
 
-    // Verificar si el formulario es válido
+    
     if (!form.checkValidity()) {
-        form.classList.add('was-validated'); // Mostrar mensajes de error
-        return; // Detener la ejecución si el formulario no es válido
+        form.classList.add('was-validated'); 
+        return; 
     }
 
-    // Si el formulario es válido, proceder con el envío de datos
+    
     let frm = new FormData(form);
 
     fetchPost("Citas/GuardarCita", "text", frm, function (res) {
@@ -88,7 +88,7 @@ function GuardarCita() {
         Exito("Cita guardada con éxito");
         ListarCitas();
 
-        // Cerrar modal correctamente
+        
         var myModal = bootstrap.Modal.getInstance(document.getElementById('modalCita'));
         if (myModal) myModal.hide();
     });
@@ -102,11 +102,12 @@ function Editar(id) {
         setN("fechaHora", data.fechaHora);
         setN("estado", data.estado);
 
-        // Mostrar el modal
+        
         var myModal = new bootstrap.Modal(document.getElementById('modalCita'));
         myModal.show();
     });
 }
+
 
 function Eliminar(id) {
     fetchGet("Citas/ObtenerCita/?id=" + id, "json", function (data) {
@@ -122,7 +123,7 @@ function LimpiarDatos(formId) {
     let form = document.getElementById(formId);
     if (form) {
         form.reset();
-        form.classList.remove('was-validated'); // Limpiar validación
+        form.classList.remove('was-validated'); 
     }
 }
 function MostrarModal() {

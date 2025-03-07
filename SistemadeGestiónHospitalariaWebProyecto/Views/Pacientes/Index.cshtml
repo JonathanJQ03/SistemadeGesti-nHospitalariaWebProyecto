@@ -7,7 +7,7 @@
 <style>
     .bg-info1 {
         --bs-bg-opacity: 1;
-        background-color: #8e74b6 !important;
+        background-color: #3674B5 !important;
     }
 
     .text-primary1 {
@@ -17,6 +17,12 @@
     #error-message {
         display: none;
         margin-top: 15px;
+    }
+
+    .error-message {
+        color: red;
+        font-size: 0.875em;
+        margin-top: 5px;
     }
 </style>
 
@@ -66,21 +72,10 @@
                     <div class="col-md-4">
                         <label for="telefono" class="form-label">Teléfono</label>
                         <input type="tel" class="form-control shadow-sm rounded" name="telefono" id="telefono" maxlength="10" required>
-                        <script>
-                            document.getElementById("telefono").addEventListener("blur", function () {
-                                let telefono = this.value.trim();
-                                let regex = /^09\d{8}$/;
-
-                                if (!regex.test(telefono)) {
-                                    alert("El número debe comenzar con 09 y tener exactamente 10 dígitos.");
-                                    this.value = ""; // Borra el valor si es incorrecto
-                                    this.focus(); // Mantiene el foco en el input hasta que se corrija
-                                }
-                            });
-                        </script>
                         <div class="invalid-feedback">
                             Por favor, ingresa un teléfono válido (09XXXXXXXX).
                         </div>
+                        <div id="telefono-error" class="error-message"></div>
                     </div>
                     <div class="col-md-4">
                         <label for="email" class="form-label">Email</label>
@@ -91,7 +86,7 @@
                     </div>
                     <div class="col-md-12">
                         <label for="direccion" class="form-label">Dirección</label>
-                        <input type="text" class="form-control shadow-sm rounded" oninput="validarNombre(this)" name="direccion" id="direccion" required>
+                        <input type="text" class="form-control shadow-sm rounded" name="direccion" id="direccion" required>
                         <div class="invalid-feedback">
                             Por favor, ingresa la dirección.
                         </div>
@@ -121,6 +116,7 @@
         <div id="divContenedorTabla"></div>
     </div>
 </div>
+
 <script>
     (function () {
         'use strict';
@@ -143,4 +139,3 @@
 <script src="~/js/generic.js"></script>
 <script src="~/js/paciente.js"></script>
 <script src="~/js/Validaciones.js"></script>
-
